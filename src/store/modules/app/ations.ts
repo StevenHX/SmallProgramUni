@@ -9,13 +9,10 @@ type AugmentedActionContext = {
   commit<K extends keyof Mutations>(key: K, payload: Parameters<Mutations[K]>[1]): ReturnType<Mutations[K]>
 } & Omit<ActionContext<AppState, RootState>, 'commit'>
 
-export interface Actions {
-  [AppActionTypes.ACTION_RESET_TOKEN]({ commit }: AugmentedActionContext): void
-}
 
 export const actions: ActionTree<AppState, RootState> & Actions = {
-  [AppActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext, token: string) {
-    commit(AppMutationTypes.SET_TOKEN, token)
+  [AppActionTypes.ACTION_LOGIN]({ commit }: AugmentedActionContext) {
+    commit(AppMutationTypes.SET_TOKEN, "xxxxxxxxx")
   },
   [AppActionTypes.ACTION_RESET_TOKEN]({ commit }: AugmentedActionContext) {
     commit(AppMutationTypes.SET_TOKEN, '')

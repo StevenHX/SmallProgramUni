@@ -14,10 +14,8 @@ const vuexLocal = new VuexPersistence({
 		uni.setStorageSync(key, JSON.stringify(state));
 	},
 	restoreState: (key, storage) => {
-		console.log("111111===>" + uni.getStorageSync(key))
 		if (!uni.getStorageSync(key)) return '';
 	    const state: AppState = JSON.parse(uni.getStorageSync(key))
-		console.log("222222====>  " + state.app.token)
 		return state;
 	},
 	modules: ['app']

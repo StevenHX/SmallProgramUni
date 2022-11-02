@@ -121,10 +121,12 @@ export default defineComponent({
     }
 
     const store = useStore()
-	// store.commit(AppMutationTypes.SET_TOKEN, "123")
-	// console.log(store.state.app.token)
-	// store.dispatch(AppActionTypes.ACTION_LOGIN,"999999")
-	// console.log(store.state.app.token)
+	store.commit(AppMutationTypes.SET_TOKEN, "123")
+	console.log(store.state.app.token)
+	store.dispatch(AppActionTypes.ACTION_LOGIN)
+	console.log(store.state.app.token)
+	store.dispatch(AppActionTypes.ACTION_RESET_TOKEN)
+	console.log(store.state.app.token)
 
     const indexBanner = ref([])
 
