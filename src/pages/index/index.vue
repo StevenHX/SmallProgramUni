@@ -1,45 +1,25 @@
 <template>
   <view class="container">
-    <view
-      class="header"
-      :style="'padding-top:' + state.navTop + 'px;height:' + state.navHeight + 'px'"
-      :class="{ bg: state.showBg }"
-    >
-      <view v-if="state.currentCity" class="city">
-        <text class="iconfont icon-map-coordinates"></text>
-        {{ state.currentCity }}
-      </view>
-      <text>{{ title }}</text>
-    </view>
-    <view class="content">
-      <!--轮播图 start-->
-      <ad-swiper :img-urls="indexBanner"></ad-swiper>
-      <!--轮播图 end-->
-      <!--搜索 start-->
-      <view class="header-search" :style="{ display: state.display }"  @click="clickCity()">
-        <HeaderSearch></HeaderSearch>
-      </view>
-      <!--搜索 end-->
-
-      <!--消息 start-->
-      <MessageComp v-if="isShowMessage" @closeMessage="closeMessage"> </MessageComp>
-      <!--消息 end-->
-
-      <view style="padding: 20rpx">
-        <menus-comp :menus-config="state.quickMenu"></menus-comp>
-      </view>
-      <view style="padding: 0 20rpx 20rpx 20rpx"><MenusTwo /></view>
-      <!--精选课程 start-->
-      <RecommendGoods />
-      <!--精选课程 end-->
-      <!--活动预约 start-->
-      <EventReservation />
-      <!--活动预约 end-->
-      <!--专家答疑 start-->
-	  <text>{{store.state.app.token}}</text>
-      <QuestionsAndAnswers />
-      <!--专家答疑 end-->
-    </view>
+  	<view class="header" @click="clickCity">
+  		zzzz
+  	</view>
+  	<view class="body">
+  		xxxxxxxxxxxxxxx
+  	</view>
+	
+	 <fui-drawer :show="state.showDraw" direction="left">
+	    <scroll-view scroll-y class="fui-scroll__view">
+	      <view>
+			  <text>dsdsdsd</text>
+			  <text>dsdsdsd</text>
+			  <text>dsdsdsd</text>
+			  <text>dsdsdsd</text>
+			  <text>dsdsdsd</text>
+			  <text>dsdsdsd</text>
+			  <text>dsdsdsd</text>
+	      </view>
+	    </scroll-view>
+	  </fui-drawer>
   </view>
 </template>
 
@@ -50,70 +30,22 @@ import { AppActionTypes } from '@/store/modules/app/action-types'
 import { AppMutationTypes } from '@/store/modules/app/mutation-types'
 import { useStore } from '@/store/index.ts'
 import { mapActions } from 'vuex'
-import AdSwiper from '@/components/ad-swiper/index.vue'
-import HeaderSearch from './components/HeaderSearch.vue'
-import MessageComp from './components/MessageComp.vue'
-import MenusComp from './components/MenusComp.vue'
-import MenusTwo from './components/MenusTwo.vue'
-import RecommendGoods from './components/RecommendGoods.vue'
-import EventReservation from './components/EventReservation.vue'
-import QuestionsAndAnswers from './components/QuestionsAndAnswers.vue'
-import { IMAGE_URL, APP_NAME } from '@/config/app'
 
+import { IMAGE_URL, APP_NAME } from '@/config/app'
 import { fetchBannerList } from '@/api/banner'
+
 export default defineComponent({
   name: 'IndexPage',
   components: {
-    AdSwiper,
-    HeaderSearch,
-    MessageComp,
-    MenusComp,
-    MenusTwo,
-    RecommendGoods,
-    EventReservation,
-    QuestionsAndAnswers,
   },
   onPageScroll() {
     // console.log('onPageScroll')
   },
   setup() {
     const state = reactive({
-      imageUrl: IMAGE_URL,
-      showBg: false,
-      display: 'block',
-      navTop: 0,
-      navHeight: 40,
-      currentCity: '佛山市',
-      quickMenu: [
-        {
-          url: '../../static/images/skip/activity.png',
-          title: '活动',
-          path: '/pages/discover/activity',
-        },
-        {
-          url: '../../static/images/skip/curriculum.png',
-          title: '课程',
-          path: '/pages/goods/goods-search/index?isSelected=true',
-        },
-        {
-          url: '../../static/images/skip/AAndQ.png',
-          title: '答疑',
-          path: '/pages/living/index',
-        },
-        {
-          url: '../../static/images/skip/brand.png',
-          title: '品牌',
-          path: '/pages/coupon/list',
-        },
-        {
-          url: '../../static/images/skip/cooperate.png',
-          title: '合作',
-          path: '/pages/shop/near-shop/index',
-        },
-      ],
+      showDraw: false,
     })
 
-    const title = ref(APP_NAME)
 
     let isShowMessage = ref(true)
     const closeMessage = () => {
@@ -148,6 +80,7 @@ export default defineComponent({
 	const clickCity = function () {
 	  store.commit(AppMutationTypes.SET_TOKEN, "123")
 	  console.log(store.state.app.token)
+	  state.showDraw = true
 	}
 	
     onShow(() => {
@@ -160,28 +93,27 @@ export default defineComponent({
       state.navHeight = proxy.$CustomBar
       // #endif
 	  
-	  fetchBannerList(10).then((res: any) =>{
-		  const bannerList = res.data.map((item) => {
-		    let link = ''
-		    if (item.linkForm == 10) {
-		      const temp = JSON.parse(item.linkAddress)
-		      link = `/pages/goods/goodsDetail?productId=${temp.id}&shopId=${temp.shopId}`
-		    }
+	  // fetchBannerList(10).then((res: any) =>{
+		 //  const bannerList = res.data.map((item) => {
+		 //    let link = ''
+		 //    if (item.linkForm == 10) {
+		 //      const temp = JSON.parse(item.linkAddress)
+		 //      link = `/pages/goods/goodsDetail?productId=${temp.id}&shopId=${temp.shopId}`
+		 //    }
 		  
-		    return {
-		      bannerAddress: item.bannerAddress,
-		      src: item.img,
-		      type: item.linkForm == 20 ? 'video' : 'image',
-		      link: link,
-		    }
-		  })
-		  indexBanner.value = bannerList.filter((item: any) => item.bannerAddress == 70 || item.bannerAddress == 20)
-	  });
+		 //    return {
+		 //      bannerAddress: item.bannerAddress,
+		 //      src: item.img,
+		 //      type: item.linkForm == 20 ? 'video' : 'image',
+		 //      link: link,
+		 //    }
+		 //  })
+		 //  indexBanner.value = bannerList.filter((item: any) => item.bannerAddress == 70 || item.bannerAddress == 20)
+	  // });
     })
     return {
       state,
 	  store,
-      title,
       indexBanner,
       isShowMessage,
       closeMessage,
@@ -194,6 +126,7 @@ export default defineComponent({
 <style lang="scss">
 @import '@/static/css/variable.scss';
 .container {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -206,28 +139,25 @@ export default defineComponent({
     left: 0;
     z-index: 99;
     width: 100%;
-    height: 40px;
+    height: 500rpx;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: #ff0000;
     font-size: 32rpx;
-
-    &.bg {
-      background-color: $top-background-color;
-    }
-
-    .city {
-      font-size: 24rpx;
-      position: absolute;
-      left: 30rpx;
-      .icon-map-coordinates {
-        color: #fff;
-      }
-    }
+	background: #00aaff;
   }
-  .content {
+  .body {
     width: 100%;
+	flex: 1;
+	background: #ffaa7f;
   }
+	/* 自定义内容区样式需自行控制 */
+    .fui-scroll__view {
+		width: 520rpx;
+		flex: 1;
+		overflow: hidden;
+	}
+
 }
 </style>
