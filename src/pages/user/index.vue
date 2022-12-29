@@ -1,34 +1,33 @@
 <template>
   <view class="container">
     <view class="header">
-		<image :src="userInfo.pic" class="avator">
-		</image>
+		<fui-avatar class="avator" :src="userInfo.pic" width="200" height="200"></fui-avatar>
 		<text class="name">{{userInfo.nickName}}</text>
 		<text class="role">角色：{{userInfo.role}}</text>
     </view>
-	<view class="body">
-		<view class="body-item">
+	<view class="body-container">
+		<view class="body-container-item">
 			<view class="body-item-left">
 				<uni-icons type="chatboxes" size="20"></uni-icons>
 				<text class="text">我的留言</text>
 			</view>
 			<uni-icons type="right" size="16"></uni-icons>
 		</view>
-		<view class="body-item">
+		<view class="body-container-item">
 			<view class="body-item-left">
 				<uni-icons type="bars" size="20"></uni-icons>
 				<text class="text">我设置的纪念日</text>
 			</view>
 			<uni-icons type="right" size="16"></uni-icons>
 		</view>
-		<view class="body-item">
+		<view class="body-container-item">
 			<view class="body-item-left">
 				<uni-icons type="phone" size="20"></uni-icons>
 				<text class="text">修改联系方式</text>
 			</view>
 			<uni-icons type="right" size="16"></uni-icons>
 		</view>
-		<view class="body-item">
+		<view class="body-container-item">
 			<view class="body-item-left">
 				<uni-icons type="settings-filled" size="20"></uni-icons>
 				<text class="text">修改登录密码</text>
@@ -36,7 +35,7 @@
 			<uni-icons type="right" size="16"></uni-icons>
 		</view>
 		
-		<view class="body-btn">
+		<view class="body-btn" @click="goLogin()">
 			<text>退出登录</text>
 		</view>
 	</view>
@@ -45,6 +44,7 @@
 
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
+import { Tips } from '@/utils/util.ts';
 let isLogin = ref(true)
 let userInfo = reactive({
   pic: 'https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJ8SiagBMUuLZ7USibVCmnJBvy87ib8gT8gl1wrCwwZRVDsv9a6t4lbGLHcoiacKDxjvgw0v374xE3UkQ/132',
@@ -56,6 +56,7 @@ const toPage = (path) => {
 }
 const goLogin = () => {
   console.log('goLogin')
+  Tips({endtime:100},{tab:2,url:'/pages/login/login'})
 }
 </script>
 <style lang="scss" scoped>
@@ -88,14 +89,14 @@ const goLogin = () => {
 			margin-top: 20rpx;
 		}
 	}
-	.body {
+	.body-container {
 		margin: 20rpx 20rpx 50rpx 20rpx;
 		padding-top: 40rpx;
 		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);
 		border-radius: 16rpx;
 		height: calc(100vh - 550rpx);
 		background: linear-gradient(0deg, rgba(223, 233, 243, 1) 0%, rgba(255, 255, 255, 1) 100%);
-		.body-item {
+		.body-container-item {
 			height: 80rpx;
 			margin: 20rpx 20rpx 50rpx 20rpx;
 			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15);

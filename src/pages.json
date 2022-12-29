@@ -2,12 +2,11 @@
   "pages": [
     // pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
     {
-      "path": "pages/index/index",
-      "style": {
-        "navigationBarTitleText": "首页",
-        "navigationStyle": "custom"
-      }
-    }
+      "path": "pages/index/index"
+    },
+	{
+		"path": "pages/login/login"
+	}
   ],
   "subPackages": [],
   "globalStyle": {
@@ -17,7 +16,8 @@
     "backgroundColor": "#F8F8F8",
     "navigationStyle": "custom",
 	"usingComponents": {
-	    "fui-drawer": "/components/fui-drawer/fui-drawer"
+	    "fui-drawer": "/components/fui-drawer/fui-drawer",
+		"fui-avatar": "/components/fui-avatar/fui-avatar"
 	}
   }
 }

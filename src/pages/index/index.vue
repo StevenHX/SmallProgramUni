@@ -16,7 +16,7 @@
 			</view>
   		</image>
   	</view>
-  	<view class="body">
+  	<view class="body-container">
   		<uni-grid :column="3" :show-border="false" :square="true" @change="gridChange">
 			<view style="display:flex;flex-wrap: wrap;">
 				<uni-grid-item v-for="(item ,index) in gridList" :index="index" :key="index">
@@ -49,6 +49,7 @@ import { mapActions } from 'vuex'
 
 import { IMAGE_URL, APP_NAME } from '@/config/app'
 import { fetchBannerList } from '@/api/banner'
+import { Tips } from '@/utils/util.ts';
 
 import minePage from "../user/index.vue"
 
@@ -232,7 +233,7 @@ export default defineComponent({
 		}
 	}
   }
-  .body {
+  .body-container {
     width: 100%;
 	height: calc(100vh - 524rpx);
 	padding: 20rpx 10rpx 20rpx 10rpx;
