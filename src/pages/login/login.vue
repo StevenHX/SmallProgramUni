@@ -6,8 +6,8 @@
 	  </view>
 	  <view class="body-container">
 		  <view class="input-container">
-		  	<input class="input-item" name="username" type="text" focus placeholder="请输入用户名" @input="namechanged"/>
-		  	<input class="input-item" name="pwd" type="text" password placeholder="请输入密码" @input="pwdchanged" @confirm="pwdconfirm"/>
+		  	<input class="input-item" confirm-type="next" type="text" placeholder="请输入用户名" @input="namechanged" @confirm="usernameConfirm"/>
+		  	<input class="input-item" type="text" password placeholder="请输入密码" @input="pwdchanged" @confirm="pwdConfirm"/>
 		  </view>
 		  <button
 		    class="submit-enable"
@@ -41,7 +41,11 @@ const pwdchanged = (e)=>{
 	console.log(e)
 	console.log(e.detail.value)
 }
-const pwdconfirm = (e)=>{
+const usernameConfirm = (e)=>{
+	console.log(e.detail.value)
+	
+}
+const pwdConfirm = (e)=>{
 	console.log(e.detail.value)
 }
 </script>
@@ -97,15 +101,18 @@ const pwdconfirm = (e)=>{
 		}
 		.submit-enable {
 			margin-top: 50rpx;
-			width: 300rpx;
+			width: 380rpx;
 			height: 90rpx;
 			font-size: 32rpx;
-			color: rgba(0, 0, 0, 0.84);
 			border-radius: 24rpx;
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			font-weight: 600;
+			background: #6C5955;
+			color: #ffffff;
+			box-shadow: 5px 8px 5px 2px rgba(0, 0, 0, 0.17);
+			border: 2rpx solid #a6a6a6;
 		}
 	}
 }
