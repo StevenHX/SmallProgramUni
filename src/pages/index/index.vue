@@ -89,6 +89,26 @@ export default defineComponent({
 		console.log(e.detail.index)
 		const index = e.detail.index
 		switch(index) {
+			case 0:
+				Tips({endtime:100},{tab:2,url:'/pages/anniversary/calendar-anniversary'})
+				break;
+			case 1:
+				Tips({endtime:100},{tab:2,url:'/pages/video/index'})
+				break;
+			case 2:
+				Tips({endtime:100},{tab:2,url:'/pages/music/index'})
+				break;
+			case 3:
+				Tips({endtime:100},{tab:2,url:'/pages/picture/index'})
+				break;
+			case 4:
+				Tips({endtime:100},{tab:2,url:'/pages/file/index'})
+				break;
+			case 5:
+				break;
+			case 6:
+				Tips({endtime:100},{tab:2,url:'/pages/goods/index'})
+				break;
 			case 7:
 				clickCity.apply()
 			break;

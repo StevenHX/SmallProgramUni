@@ -6,6 +6,30 @@
     },
 	{
 		"path": "pages/login/login"
+	},
+	{
+		"path": "pages/message/mine-message"
+	},
+	{
+		"path": "pages/anniversary/calendar-anniversary"
+	},
+	{
+		"path": "pages/anniversary/mine-anniversary"
+	},
+	{
+		"path": "pages/video/index"
+	},
+	{
+		"path": "pages/music/index"
+	},
+	{
+		"path": "pages/picture/index"
+	},
+	{
+		"path": "pages/file/index"
+	},
+	{
+		"path": "pages/goods/index"
 	}
   ],
   "subPackages": [],

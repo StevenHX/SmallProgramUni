@@ -1,6 +1,7 @@
 import { createSSRApp } from 'vue'
 import App from './App.vue'
 import { store, key } from './store'
+import zhouWeiNavBar from "@/components/zhouWei-navBar/index.vue"
 export function createApp() {
   const app = createSSRApp(App)
   uni.getSystemInfo({
@@ -29,6 +30,7 @@ export function createApp() {
     },
   })
   app.use(store, key)
+  app.component("nav-bar", zhouWeiNavBar)
   return {
     app,
   }

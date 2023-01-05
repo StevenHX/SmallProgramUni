@@ -7,7 +7,7 @@
 	  <view class="body-container">
 		  <view class="input-container">
 		  	<input class="input-item" confirm-type="next" type="text" placeholder="请输入用户名" @input="namechanged" @confirm="usernameConfirm"/>
-		  	<input class="input-item" type="text" password placeholder="请输入密码" @input="pwdchanged" @confirm="pwdConfirm"/>
+		  	<input class="input-item" :focus="pwdFocus" type="text" password placeholder="请输入密码" @input="pwdchanged" @confirm="pwdConfirm"/>
 		  </view>
 		  <button
 		    class="submit-enable"
@@ -24,15 +24,16 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue'
 import { Tips } from '@/utils/util.ts';
-let isLoginEnable = ref(true)
+let pwdFocus = ref(false)
+let loginFormData = reactive({
+	username: '',
+	pwd: ''
+})
 let userInfo = reactive({
   pic: 'https://img.js.design/assets/img/6295782068f9751eae11eb96.png#dddf4fc9ef8e2622dff2309d9d566039',
   nickName: '黄晓',
   role: '男主人'
 })
-const clickLogin = () => {
-  console.log('click Login')
-}
 const namechanged = (e)=>{
 	console.log(e)
 	console.log(e.detail.value)
@@ -43,10 +44,33 @@ const pwdchanged = (e)=>{
 }
 const usernameConfirm = (e)=>{
 	console.log(e.detail.value)
-	
+	pwdFocus.value = true
+	loginFormData.username.value = e.detail.value
 }
 const pwdConfirm = (e)=>{
 	console.log(e.detail.value)
+	loginFormData.pwd.value = e.detail.value
+	this.loginForSystem()
+}
+const clickLogin = () => {
+	if (loginFormData.username != '' && loginFormData.pwd != '') {
+		this.loginFormData()
+	} else if (loginFormData.username == '') {
+		uni.showToast({
+			title: '用户名为空'
+		});
+	} else if (loginFormData.pwd == '') {
+		pwdFocus.value = true
+		uni.showToast({
+			title: '密码为空'
+		});
+	}
+}
+/**
+ * 执行登录操作
+ */
+const loginForSystem = () => {
+	console.log(1111)
 }
 </script>
 <style lang="scss" scoped>
